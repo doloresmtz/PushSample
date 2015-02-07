@@ -20,6 +20,12 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>Pushwoosh_AUTO</key>
+	<true/>
+	<key>Pushwoosh_APPID</key>
+	<string>E5756-F9BB0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

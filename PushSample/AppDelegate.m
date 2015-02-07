@@ -7,18 +7,39 @@
 //
 
 #import "AppDelegate.h"
+#import <Pushwoosh/PushNotificationManager.h>
 
-@interface AppDelegate ()
+#define LOCATIONS_FILE @"PWLocationTracking"
+#define LOCATIONS_FILE_TYPE @"log"
+
+@interface AppDelegate ()<PushNotificationDelegate> {
+    PushNotificationManager *pushManager;
+}
 
 @end
-
 @implementation AppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    //lots of your initialization code
+    
+    //-----------PUSHWOOSH PART-----------
+    // set custom delegate for push handling, in our case - view controller
+    PushNotificationManager * pushManager = [PushNotificationManager pushManager];
+    pushManager.delegate = self;
+    
+    // handling push on app start
+    [[PushNotificationManager pushManager] handlePushReceived:launchOptions];
+    
+    // make sure we count app open in Pushwoosh stats
+    [[PushNotificationManager pushManager] sendAppOpen];
+    
+    // register for push notifications!
+    [[PushNotificationManager pushManager] registerForPushNotifications];
+    
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
